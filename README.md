@@ -26,9 +26,9 @@ Ecosistema que reemplaza el envío manual de renovaciones de pólizas de Respons
 | Archivo | Qué es |
 |---|---|
 | `Documentacion_tecnica_Renovaciones_NOBLE.pdf` | Diagrama de arquitectura, manual de datos y esquemas JSON, matriz de costos, seguridad y resiliencia, dashboard |
-| `blueprints/Escenario_1_Envio_de_avisos.blueprint.json` | Flujo exportado de Make |
-| `blueprints/Escenario_2_Respuestas.blueprint.json` | Flujo exportado de Make |
-| `capturas/` | Evidencia de las ejecuciones |
+| `Escenario_1_Envio_de_avisos.blueprint.json` | Blueprint exportado de Make (envío de avisos) |
+| `Escenario_2_Respuestas.blueprint.json` | Blueprint exportado de Make (respuestas del asegurado + IA) |
+| Archivos `.png` | Capturas de evidencia (ver abajo) |
 
 ## Enlaces
 
@@ -45,3 +45,23 @@ Ecosistema que reemplaza el envío manual de renovaciones de pólizas de Respons
 | Respuesta "No renueva" con comentario | Sin confirmación; resumen de la IA guardado y aviso al PAS |
 
 Los datos de los 25 asegurados son simulados.
+
+## Capturas
+
+**Escenario 1 · Envío de avisos (Make)**
+![Escenario 1](escenario1_make.png)
+
+**Escenario 2 · Respuestas del asegurado (Make)**
+![Escenario 2](escenario2_make.png)
+
+**Aviso que recibe el asegurado**
+![Mail al asegurado](mail_aviso_asegurado.png)
+
+**Aviso al PAS con la lectura de la IA**
+![Mail al PAS](mail_aviso_PAS_con_IA.png)
+
+**Log de errores (camino infeliz)**
+![Log](log_errores.png)
+
+**Dashboard de control**
+![Dashboard](dashboard_airtable.png)
