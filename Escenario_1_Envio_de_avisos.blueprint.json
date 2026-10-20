@@ -1,0 +1,1377 @@
+{
+    "name": "NOBLE Renovaciones 1 - Envío de avisos",
+    "flow": [
+        {
+            "id": 1,
+            "module": "airtable:ActionSearchRecords",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 11693265
+            },
+            "mapper": {
+                "base": "appgV5UYjCCXHAEqR",
+                "table": "tblNasNzMCOwlSbTG",
+                "formula": "{Estado}=\"Listo para enviar\"",
+                "maxRecords": "25",
+                "useColumnId": false,
+                "formulaField": "formula"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0,
+                    "name": "Buscar pólizas listas para enviar"
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "mode": "chose",
+                            "label": "Pruebas de Automatizaciones"
+                        },
+                        "sort": {
+                            "mode": "chose"
+                        },
+                        "view": {
+                            "mode": "chose"
+                        },
+                        "table": {
+                            "mode": "chose",
+                            "label": "Asegurados"
+                        },
+                        "fields": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        },
+                        "formulaField": {
+                            "mode": "chose",
+                            "label": "Airtable formula"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "Noble's Airtable OAuth connection (User ID: usrBgYR8B7zvtR8pi)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "maxRecords",
+                        "type": "integer",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "sort",
+                        "spec": [
+                            {
+                                "name": "field",
+                                "type": "select",
+                                "label": "Field",
+                                "dynamic": true,
+                                "options": []
+                            },
+                            {
+                                "name": "direction",
+                                "type": "select",
+                                "label": "Direction",
+                                "options": [
+                                    {
+                                        "label": "Descending",
+                                        "value": "desc"
+                                    },
+                                    {
+                                        "label": "Ascending",
+                                        "value": "asc"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Sort"
+                    },
+                    {
+                        "name": "view",
+                        "type": "select",
+                        "label": "View"
+                    },
+                    {
+                        "name": "fields",
+                        "type": "select",
+                        "label": "Output fields",
+                        "multiple": true
+                    },
+                    {
+                        "name": "formulaField",
+                        "type": "select",
+                        "label": "Filter type",
+                        "validate": {
+                            "enum": [
+                                "formula",
+                                "simpleFilter"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formula",
+                        "type": "text",
+                        "label": "Formula"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created time"
+                    },
+                    {
+                        "name": "N° de póliza",
+                        "type": "text",
+                        "label": "N° de póliza",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Asegurado",
+                        "type": "text",
+                        "label": "Asegurado",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Especialidad",
+                        "type": "text",
+                        "label": "Especialidad"
+                    },
+                    {
+                        "name": "Vigencia desde",
+                        "time": false,
+                        "type": "date",
+                        "label": "Vigencia desde"
+                    },
+                    {
+                        "name": "Vigencia hasta",
+                        "time": false,
+                        "type": "date",
+                        "label": "Vigencia hasta"
+                    },
+                    {
+                        "name": "Suma asegurada actual",
+                        "type": "number",
+                        "label": "Suma asegurada actual"
+                    },
+                    {
+                        "name": "Premio anual",
+                        "type": "number",
+                        "label": "Premio anual"
+                    },
+                    {
+                        "name": "Premio mensual",
+                        "type": "number",
+                        "label": "Premio mensual"
+                    },
+                    {
+                        "name": "Nueva suma asegurada",
+                        "type": "number",
+                        "label": "Nueva suma asegurada"
+                    },
+                    {
+                        "name": "Premio anual nueva suma",
+                        "type": "number",
+                        "label": "Premio anual nueva suma"
+                    },
+                    {
+                        "name": "Premio mensual nueva suma",
+                        "type": "number",
+                        "label": "Premio mensual nueva suma"
+                    },
+                    {
+                        "name": "Mail del asegurado",
+                        "type": "text",
+                        "label": "Mail del asegurado",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Nombre del PAS",
+                        "type": "text",
+                        "label": "Nombre del PAS"
+                    },
+                    {
+                        "name": "Mail del PAS",
+                        "type": "text",
+                        "label": "Mail del PAS"
+                    },
+                    {
+                        "name": "Estado",
+                        "type": "text",
+                        "label": "Estado"
+                    },
+                    {
+                        "name": "Fecha de envío",
+                        "type": "text",
+                        "label": "Fecha de envío",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Fecha de respuesta",
+                        "type": "text",
+                        "label": "Fecha de respuesta",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Comentario",
+                        "type": "text",
+                        "label": "Comentario",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Resumen IA",
+                        "type": "text",
+                        "label": "Resumen IA",
+                        "multiline": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0,
+                    "name": "¿Datos completos?"
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 3,
+                            "module": "google-email:ActionSendEmail",
+                            "version": 2,
+                            "parameters": {
+                                "account": 11740379
+                            },
+                            "filter": {
+                                "name": "Datos completos",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{1.`Mail del asegurado`}}",
+                                            "o": "exist"
+                                        },
+                                        {
+                                            "a": "{{1.`Nueva suma asegurada`}}",
+                                            "o": "exist"
+                                        },
+                                        {
+                                            "a": "{{1.`Premio mensual nueva suma`}}",
+                                            "o": "exist"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "cc": [],
+                                "to": [
+                                    "{{1.`Mail del asegurado`}}"
+                                ],
+                                "bcc": [],
+                                "from": "",
+                                "html": "<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.5;color:#1f2933;max-width:600px\">\n<p>Hola, {{1.Asegurado}}:</p>\n<p>Tu póliza de Responsabilidad Civil Profesional <b>N° {{1.`N° de póliza`}}</b> ({{1.Especialidad}}) vence el <b>{{formatDate(1.`Vigencia hasta`; \"DD/MM/YYYY\")}}</b>. Te acerco la propuesta de renovación para que sigas con cobertura sin interrupciones.</p>\n<table style=\"border-collapse:collapse;margin:16px 0;font-size:15px\">\n<tr><th style=\"padding:8px 12px;border-bottom:2px solid #c9ced6;text-align:left\"></th><th style=\"padding:8px 12px;border-bottom:2px solid #c9ced6;text-align:left\">Tu cobertura actual</th><th style=\"padding:8px 12px;border-bottom:2px solid #c9ced6;text-align:left\">Opción sugerida</th></tr>\n<tr><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\">Suma asegurada</td><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\">$ {{formatNumber(1.`Suma asegurada actual`; 0; \",\"; \".\")}}</td><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\"><b>$ {{formatNumber(1.`Nueva suma asegurada`; 0; \",\"; \".\")}}</b></td></tr>\n<tr><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\">Premio mensual</td><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\">$ {{formatNumber(1.`Premio mensual`; 0; \",\"; \".\")}}</td><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\"><b>$ {{formatNumber(1.`Premio mensual nueva suma`; 0; \",\"; \".\")}}</b></td></tr>\n<tr><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\">Premio anual</td><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\">$ {{formatNumber(1.`Premio anual`; 0; \",\"; \".\")}}</td><td style=\"padding:8px 12px;border-bottom:1px solid #e3e6ea\"><b>$ {{formatNumber(1.`Premio anual nueva suma`; 0; \",\"; \".\")}}</b></td></tr>\n</table>\n<p>Elegí una opción. Se abre un formulario breve para que la confirmes:</p>\n<p><a href=\"https://airtable.com/appgV5UYjCCXHAEqR/pagMAva8IiczPADmp/form?prefill_Poliza={{1.`N° de póliza`}}&prefill_Decision=Acepta%20renovar\" style=\"display:inline-block;margin:0 8px 10px 0;padding:12px 18px;background:#1e7b4a;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:bold\">Acepto renovar</a><a href=\"https://airtable.com/appgV5UYjCCXHAEqR/pagMAva8IiczPADmp/form?prefill_Poliza={{1.`N° de póliza`}}&prefill_Decision=No%20renueva\" style=\"display:inline-block;margin:0 8px 10px 0;padding:12px 18px;background:#5b6470;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:bold\">No renuevo</a><a href=\"https://airtable.com/appgV5UYjCCXHAEqR/pagMAva8IiczPADmp/form?prefill_Poliza={{1.`N° de póliza`}}&prefill_Decision=Solicita%20contacto\" style=\"display:inline-block;margin:0 8px 10px 0;padding:12px 18px;background:#1c5fa8;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:bold\">Quiero que me contacten</a></p>\n<p style=\"font-size:13px;color:#5b6470\">Este aviso se generó de forma automática con los datos de tu póliza. Si algo no coincide, respondé este mail y lo reviso personalmente.</p>\n<p>Saludos,<br>{{1.`Nombre del PAS`}}<br>Productor Asesor de Seguros</p>\n</div>",
+                                "subject": "Renovación de tu póliza {{1.`N° de póliza`}}: vence el {{formatDate(1.`Vigencia hasta`; \"DD/MM/YYYY\")}}",
+                                "attachments": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": -150,
+                                    "name": "Enviar aviso con 3 botones"
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "fc5b0e6477db11aa"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "cc": {
+                                            "mode": "chose"
+                                        },
+                                        "to": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "bcc": {
+                                            "mode": "chose"
+                                        },
+                                        "attachments": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "Noble's Google Restricted connection (noblesegurosmkt@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "from",
+                                        "type": "text",
+                                        "label": "From"
+                                    },
+                                    {
+                                        "name": "to",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Email address",
+                                            "required": true
+                                        },
+                                        "type": "array",
+                                        "label": "To",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "subject",
+                                        "type": "text",
+                                        "label": "Subject"
+                                    },
+                                    {
+                                        "name": "html",
+                                        "type": "text",
+                                        "label": "Content"
+                                    },
+                                    {
+                                        "name": "attachments",
+                                        "spec": [
+                                            {
+                                                "name": "fileName",
+                                                "type": "filename",
+                                                "label": "File name",
+                                                "required": true,
+                                                "semantic": "file:name"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "type": "buffer",
+                                                "label": "Data",
+                                                "required": true,
+                                                "semantic": "file:data"
+                                            },
+                                            {
+                                                "name": "cid",
+                                                "type": "text",
+                                                "label": "Content-ID"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Attachments"
+                                    },
+                                    {
+                                        "name": "cc",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Email address"
+                                        },
+                                        "type": "array",
+                                        "label": "Copy recipient"
+                                    },
+                                    {
+                                        "name": "bcc",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Email address"
+                                        },
+                                        "type": "array",
+                                        "label": "Blind copy recipient"
+                                    }
+                                ]
+                            },
+                            "onerror": [
+                                {
+                                    "id": 5,
+                                    "module": "builtin:Break",
+                                    "version": 1,
+                                    "parameters": {},
+                                    "mapper": {
+                                        "count": 3,
+                                        "retry": true,
+                                        "interval": 15
+                                    },
+                                    "metadata": {
+                                        "designer": {
+                                            "x": 600,
+                                            "y": -450,
+                                            "name": "Reintentar 3 veces"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "module": "airtable:ActionUpdateRecords",
+                            "version": 3,
+                            "parameters": {
+                                "__IMTCONN__": 11693265
+                            },
+                            "mapper": {
+                                "id": "{{1.id}}",
+                                "base": "appgV5UYjCCXHAEqR",
+                                "table": "tblNasNzMCOwlSbTG",
+                                "record": {
+                                    "fld8S5rz65B6vVvqI": "Enviado",
+                                    "fldotSK04emkfs6TM": "{{now}}"
+                                },
+                                "typecast": false,
+                                "useColumnId": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": -150,
+                                    "name": "Marcar como Enviado"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "base": {
+                                            "label": "Pruebas de Automatizaciones"
+                                        },
+                                        "table": {
+                                            "label": "Asegurados"
+                                        },
+                                        "record": {
+                                            "nested": {
+                                                "fld0nBTsaqWc0D7Lz": {
+                                                    "mode": "edit"
+                                                },
+                                                "fld8S5rz65B6vVvqI": {
+                                                    "mode": "chose",
+                                                    "label": "Enviado"
+                                                },
+                                                "fldII9zrr3YkTcI1b": {
+                                                    "mode": "edit"
+                                                },
+                                                "fldYSzY0tEpYifMzU": {
+                                                    "mode": "edit"
+                                                }
+                                            }
+                                        },
+                                        "typecast": {
+                                            "mode": "chose"
+                                        },
+                                        "useColumnId": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "airtable3"
+                                            },
+                                            "label": "Noble's Airtable OAuth connection (User ID: usrBgYR8B7zvtR8pi)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:airtable3,airtable2",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "base",
+                                        "type": "select",
+                                        "label": "Base",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "typecast",
+                                        "type": "boolean",
+                                        "label": "Smart links",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useColumnId",
+                                        "type": "boolean",
+                                        "label": "Use column ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "table",
+                                        "type": "select",
+                                        "label": "Table",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "Record ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "record",
+                                        "spec": [
+                                            {
+                                                "name": "fldmkWHu3rWKbjZgA",
+                                                "type": "text",
+                                                "label": "N° de póliza"
+                                            },
+                                            {
+                                                "name": "fldj9jmipiGY2kDAs",
+                                                "type": "text",
+                                                "label": "Asegurado"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fldII9zrr3YkTcI1b",
+                                                "type": "select",
+                                                "label": "Especialidad"
+                                            },
+                                            {
+                                                "name": "fld3p5gPhTa3VOBvy",
+                                                "time": false,
+                                                "type": "date",
+                                                "label": "Vigencia desde"
+                                            },
+                                            {
+                                                "name": "fldKhYQe0AaAm4GZh",
+                                                "time": false,
+                                                "type": "date",
+                                                "label": "Vigencia hasta"
+                                            },
+                                            {
+                                                "name": "fldkx6vYLQQ7wP4oH",
+                                                "type": "number",
+                                                "label": "Suma asegurada actual"
+                                            },
+                                            {
+                                                "name": "fldEzD5Vri9nswv94",
+                                                "type": "number",
+                                                "label": "Premio anual"
+                                            },
+                                            {
+                                                "name": "fldO7N3hucXJy7P6y",
+                                                "type": "number",
+                                                "label": "Premio mensual"
+                                            },
+                                            {
+                                                "name": "fldllmGA7102ADam9",
+                                                "type": "number",
+                                                "label": "Nueva suma asegurada"
+                                            },
+                                            {
+                                                "name": "fldHHXF1KtS3TePmq",
+                                                "type": "number",
+                                                "label": "Premio anual nueva suma"
+                                            },
+                                            {
+                                                "name": "fldJVixw4awKuTc2o",
+                                                "type": "number",
+                                                "label": "Premio mensual nueva suma"
+                                            },
+                                            {
+                                                "name": "fld6DvnEGk2yOzVmT",
+                                                "type": "text",
+                                                "label": "Mail del asegurado"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fld0nBTsaqWc0D7Lz",
+                                                "type": "select",
+                                                "label": "Nombre del PAS"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fldYSzY0tEpYifMzU",
+                                                "type": "select",
+                                                "label": "Mail del PAS"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fld8S5rz65B6vVvqI",
+                                                "type": "select",
+                                                "label": "Estado"
+                                            },
+                                            {
+                                                "name": "fldotSK04emkfs6TM",
+                                                "type": "text",
+                                                "label": "Fecha de envío"
+                                            },
+                                            {
+                                                "name": "fldNA5zbSOnpS35Pn",
+                                                "type": "text",
+                                                "label": "Fecha de respuesta"
+                                            },
+                                            {
+                                                "name": "fldGI6CyDOB9SY8Bg",
+                                                "type": "text",
+                                                "label": "Comentario"
+                                            },
+                                            {
+                                                "name": "fldjni6ZDEHamB2CR",
+                                                "type": "text",
+                                                "label": "Resumen IA"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Record"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "ID"
+                                    },
+                                    {
+                                        "name": "createdTime",
+                                        "type": "date",
+                                        "label": "Created time"
+                                    },
+                                    {
+                                        "name": "N° de póliza",
+                                        "type": "text",
+                                        "label": "N° de póliza",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Asegurado",
+                                        "type": "text",
+                                        "label": "Asegurado",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Especialidad",
+                                        "type": "text",
+                                        "label": "Especialidad"
+                                    },
+                                    {
+                                        "name": "Vigencia desde",
+                                        "time": false,
+                                        "type": "date",
+                                        "label": "Vigencia desde"
+                                    },
+                                    {
+                                        "name": "Vigencia hasta",
+                                        "time": false,
+                                        "type": "date",
+                                        "label": "Vigencia hasta"
+                                    },
+                                    {
+                                        "name": "Suma asegurada actual",
+                                        "type": "number",
+                                        "label": "Suma asegurada actual"
+                                    },
+                                    {
+                                        "name": "Premio anual",
+                                        "type": "number",
+                                        "label": "Premio anual"
+                                    },
+                                    {
+                                        "name": "Premio mensual",
+                                        "type": "number",
+                                        "label": "Premio mensual"
+                                    },
+                                    {
+                                        "name": "Nueva suma asegurada",
+                                        "type": "number",
+                                        "label": "Nueva suma asegurada"
+                                    },
+                                    {
+                                        "name": "Premio anual nueva suma",
+                                        "type": "number",
+                                        "label": "Premio anual nueva suma"
+                                    },
+                                    {
+                                        "name": "Premio mensual nueva suma",
+                                        "type": "number",
+                                        "label": "Premio mensual nueva suma"
+                                    },
+                                    {
+                                        "name": "Mail del asegurado",
+                                        "type": "text",
+                                        "label": "Mail del asegurado",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Nombre del PAS",
+                                        "type": "text",
+                                        "label": "Nombre del PAS"
+                                    },
+                                    {
+                                        "name": "Mail del PAS",
+                                        "type": "text",
+                                        "label": "Mail del PAS"
+                                    },
+                                    {
+                                        "name": "Estado",
+                                        "type": "text",
+                                        "label": "Estado"
+                                    },
+                                    {
+                                        "name": "Fecha de envío",
+                                        "type": "text",
+                                        "label": "Fecha de envío",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Fecha de respuesta",
+                                        "type": "text",
+                                        "label": "Fecha de respuesta",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Comentario",
+                                        "type": "text",
+                                        "label": "Comentario",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Resumen IA",
+                                        "type": "text",
+                                        "label": "Resumen IA",
+                                        "multiline": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 6,
+                            "module": "airtable:ActionUpdateRecords",
+                            "version": 3,
+                            "parameters": {
+                                "__IMTCONN__": 11693265
+                            },
+                            "filter": {
+                                "name": "Faltan datos",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{1.`Mail del asegurado`}}",
+                                            "o": "notexist"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "a": "{{1.`Nueva suma asegurada`}}",
+                                            "o": "notexist"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "a": "{{1.`Premio mensual nueva suma`}}",
+                                            "o": "notexist"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "id": "{{1.id}}",
+                                "base": "appgV5UYjCCXHAEqR",
+                                "table": "tblNasNzMCOwlSbTG",
+                                "record": {
+                                    "fld8S5rz65B6vVvqI": "Error de datos"
+                                },
+                                "typecast": false,
+                                "useColumnId": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": 150,
+                                    "name": "Marcar Error de datos"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "base": {
+                                            "label": "Pruebas de Automatizaciones"
+                                        },
+                                        "table": {
+                                            "label": "Asegurados"
+                                        },
+                                        "record": {
+                                            "nested": {
+                                                "fld0nBTsaqWc0D7Lz": {
+                                                    "mode": "edit"
+                                                },
+                                                "fld8S5rz65B6vVvqI": {
+                                                    "mode": "chose",
+                                                    "label": "Error de datos"
+                                                },
+                                                "fldII9zrr3YkTcI1b": {
+                                                    "mode": "edit"
+                                                },
+                                                "fldYSzY0tEpYifMzU": {
+                                                    "mode": "edit"
+                                                }
+                                            }
+                                        },
+                                        "typecast": {
+                                            "mode": "chose"
+                                        },
+                                        "useColumnId": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "airtable3"
+                                            },
+                                            "label": "Noble's Airtable OAuth connection (User ID: usrBgYR8B7zvtR8pi)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:airtable3,airtable2",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "base",
+                                        "type": "select",
+                                        "label": "Base",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "typecast",
+                                        "type": "boolean",
+                                        "label": "Smart links",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useColumnId",
+                                        "type": "boolean",
+                                        "label": "Use column ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "table",
+                                        "type": "select",
+                                        "label": "Table",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "Record ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "record",
+                                        "spec": [
+                                            {
+                                                "name": "fldmkWHu3rWKbjZgA",
+                                                "type": "text",
+                                                "label": "N° de póliza"
+                                            },
+                                            {
+                                                "name": "fldj9jmipiGY2kDAs",
+                                                "type": "text",
+                                                "label": "Asegurado"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fldII9zrr3YkTcI1b",
+                                                "type": "select",
+                                                "label": "Especialidad"
+                                            },
+                                            {
+                                                "name": "fld3p5gPhTa3VOBvy",
+                                                "time": false,
+                                                "type": "date",
+                                                "label": "Vigencia desde"
+                                            },
+                                            {
+                                                "name": "fldKhYQe0AaAm4GZh",
+                                                "time": false,
+                                                "type": "date",
+                                                "label": "Vigencia hasta"
+                                            },
+                                            {
+                                                "name": "fldkx6vYLQQ7wP4oH",
+                                                "type": "number",
+                                                "label": "Suma asegurada actual"
+                                            },
+                                            {
+                                                "name": "fldEzD5Vri9nswv94",
+                                                "type": "number",
+                                                "label": "Premio anual"
+                                            },
+                                            {
+                                                "name": "fldO7N3hucXJy7P6y",
+                                                "type": "number",
+                                                "label": "Premio mensual"
+                                            },
+                                            {
+                                                "name": "fldllmGA7102ADam9",
+                                                "type": "number",
+                                                "label": "Nueva suma asegurada"
+                                            },
+                                            {
+                                                "name": "fldHHXF1KtS3TePmq",
+                                                "type": "number",
+                                                "label": "Premio anual nueva suma"
+                                            },
+                                            {
+                                                "name": "fldJVixw4awKuTc2o",
+                                                "type": "number",
+                                                "label": "Premio mensual nueva suma"
+                                            },
+                                            {
+                                                "name": "fld6DvnEGk2yOzVmT",
+                                                "type": "text",
+                                                "label": "Mail del asegurado"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fld0nBTsaqWc0D7Lz",
+                                                "type": "select",
+                                                "label": "Nombre del PAS"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fldYSzY0tEpYifMzU",
+                                                "type": "select",
+                                                "label": "Mail del PAS"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fld8S5rz65B6vVvqI",
+                                                "type": "select",
+                                                "label": "Estado"
+                                            },
+                                            {
+                                                "name": "fldotSK04emkfs6TM",
+                                                "type": "text",
+                                                "label": "Fecha de envío"
+                                            },
+                                            {
+                                                "name": "fldNA5zbSOnpS35Pn",
+                                                "type": "text",
+                                                "label": "Fecha de respuesta"
+                                            },
+                                            {
+                                                "name": "fldGI6CyDOB9SY8Bg",
+                                                "type": "text",
+                                                "label": "Comentario"
+                                            },
+                                            {
+                                                "name": "fldjni6ZDEHamB2CR",
+                                                "type": "text",
+                                                "label": "Resumen IA"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Record"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "ID"
+                                    },
+                                    {
+                                        "name": "createdTime",
+                                        "type": "date",
+                                        "label": "Created time"
+                                    },
+                                    {
+                                        "name": "N° de póliza",
+                                        "type": "text",
+                                        "label": "N° de póliza",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Asegurado",
+                                        "type": "text",
+                                        "label": "Asegurado",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Especialidad",
+                                        "type": "text",
+                                        "label": "Especialidad"
+                                    },
+                                    {
+                                        "name": "Vigencia desde",
+                                        "time": false,
+                                        "type": "date",
+                                        "label": "Vigencia desde"
+                                    },
+                                    {
+                                        "name": "Vigencia hasta",
+                                        "time": false,
+                                        "type": "date",
+                                        "label": "Vigencia hasta"
+                                    },
+                                    {
+                                        "name": "Suma asegurada actual",
+                                        "type": "number",
+                                        "label": "Suma asegurada actual"
+                                    },
+                                    {
+                                        "name": "Premio anual",
+                                        "type": "number",
+                                        "label": "Premio anual"
+                                    },
+                                    {
+                                        "name": "Premio mensual",
+                                        "type": "number",
+                                        "label": "Premio mensual"
+                                    },
+                                    {
+                                        "name": "Nueva suma asegurada",
+                                        "type": "number",
+                                        "label": "Nueva suma asegurada"
+                                    },
+                                    {
+                                        "name": "Premio anual nueva suma",
+                                        "type": "number",
+                                        "label": "Premio anual nueva suma"
+                                    },
+                                    {
+                                        "name": "Premio mensual nueva suma",
+                                        "type": "number",
+                                        "label": "Premio mensual nueva suma"
+                                    },
+                                    {
+                                        "name": "Mail del asegurado",
+                                        "type": "text",
+                                        "label": "Mail del asegurado",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Nombre del PAS",
+                                        "type": "text",
+                                        "label": "Nombre del PAS"
+                                    },
+                                    {
+                                        "name": "Mail del PAS",
+                                        "type": "text",
+                                        "label": "Mail del PAS"
+                                    },
+                                    {
+                                        "name": "Estado",
+                                        "type": "text",
+                                        "label": "Estado"
+                                    },
+                                    {
+                                        "name": "Fecha de envío",
+                                        "type": "text",
+                                        "label": "Fecha de envío",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Fecha de respuesta",
+                                        "type": "text",
+                                        "label": "Fecha de respuesta",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Comentario",
+                                        "type": "text",
+                                        "label": "Comentario",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Resumen IA",
+                                        "type": "text",
+                                        "label": "Resumen IA",
+                                        "multiline": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 7,
+                            "module": "airtable:ActionCreateRecord",
+                            "version": 3,
+                            "parameters": {
+                                "__IMTCONN__": 11693265
+                            },
+                            "mapper": {
+                                "base": "appgV5UYjCCXHAEqR",
+                                "table": "tblfErQOjEO5KGeFR",
+                                "record": {
+                                    "fldE1pUjKWj2KHWZf": "{{now}}",
+                                    "fldIfwsedf5ZnXjbE": "Datos faltantes",
+                                    "fldMaMrQPvX3LLc8t": "{{1.`N° de póliza`}}",
+                                    "fldXJxs6XNdChqFBG": "Falta el mail o la nueva suma"
+                                },
+                                "typecast": false,
+                                "useColumnId": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 150,
+                                    "name": "Anotar en el Log"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "base": {
+                                            "label": "Pruebas de Automatizaciones"
+                                        },
+                                        "table": {
+                                            "label": "Log",
+                                            "nested": [
+                                                {
+                                                    "name": "record",
+                                                    "spec": [
+                                                        {
+                                                            "name": "fldIfwsedf5ZnXjbE",
+                                                            "type": "text",
+                                                            "label": "Evento",
+                                                            "multiline": true
+                                                        },
+                                                        {
+                                                            "name": "fldE1pUjKWj2KHWZf",
+                                                            "time": false,
+                                                            "type": "date",
+                                                            "label": "Fecha"
+                                                        },
+                                                        {
+                                                            "name": "fldMaMrQPvX3LLc8t",
+                                                            "type": "text",
+                                                            "label": "Poliza",
+                                                            "multiline": true
+                                                        },
+                                                        {
+                                                            "name": "fldXJxs6XNdChqFBG",
+                                                            "type": "text",
+                                                            "label": "Detalle",
+                                                            "multiline": true
+                                                        }
+                                                    ],
+                                                    "type": "collection",
+                                                    "label": "Record"
+                                                }
+                                            ]
+                                        },
+                                        "typecast": {
+                                            "mode": "chose"
+                                        },
+                                        "useColumnId": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "airtable3"
+                                            },
+                                            "label": "Noble's Airtable OAuth connection (User ID: usrBgYR8B7zvtR8pi)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:airtable3,airtable2",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "base",
+                                        "type": "select",
+                                        "label": "Base",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "typecast",
+                                        "type": "boolean",
+                                        "label": "Smart links",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useColumnId",
+                                        "type": "boolean",
+                                        "label": "Use column ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "table",
+                                        "type": "select",
+                                        "label": "Table",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "record",
+                                        "spec": [
+                                            {
+                                                "name": "fldIfwsedf5ZnXjbE",
+                                                "type": "text",
+                                                "label": "Evento"
+                                            },
+                                            {
+                                                "name": "fldE1pUjKWj2KHWZf",
+                                                "time": false,
+                                                "type": "date",
+                                                "label": "Fecha"
+                                            },
+                                            {
+                                                "name": "fldMaMrQPvX3LLc8t",
+                                                "type": "text",
+                                                "label": "Poliza"
+                                            },
+                                            {
+                                                "name": "fldXJxs6XNdChqFBG",
+                                                "type": "text",
+                                                "label": "Detalle"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Record"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "ID"
+                                    },
+                                    {
+                                        "name": "createdTime",
+                                        "type": "date",
+                                        "label": "Created time"
+                                    },
+                                    {
+                                        "name": "Evento",
+                                        "type": "text",
+                                        "label": "Evento",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Fecha",
+                                        "time": false,
+                                        "type": "date",
+                                        "label": "Fecha"
+                                    },
+                                    {
+                                        "name": "Poliza",
+                                        "type": "text",
+                                        "label": "Poliza",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Detalle",
+                                        "type": "text",
+                                        "label": "Detalle",
+                                        "multiline": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": true,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
